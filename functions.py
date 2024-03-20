@@ -7,5 +7,4 @@ import numpy as np
 import sympy as sym  
 import scipy as sp
 
-def inverse():
-    return np.linalg
+#Add functions below

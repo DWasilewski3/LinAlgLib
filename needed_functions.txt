@@ -1,0 +1,35 @@
+Notes by topics (1 note set per topic --> ~20 total)
+help funciton that lists all other functions
+
+dot product
+multiplication 
+can multiply (by size) + output size
+projection
+rref
+ref
+addition
+transpose
+determinant (normal, triangles, diagonal)
+inverse (regular and gaussian elimination)
+invertable? boolean
+elementary matrices
+linear transformations (both to and from matrix)
+kernel
+nullspace
+one-to-one
+onto
+range/image of transformations
+euclidean subspace  boolean
+basis for subspace
+linearly independent set
+spanning set
+null space of given matrix
+column space of given matrix
+row space of given matrix
+orthagonal vectors
+orthagonal basis
+orthagonal compliment to subspace
+orthagonal compliment to vector
+is a given vector an eigenvector for a given matrix
+is a given number an eigennumber for a given matrix
+find all eigenvectors for a given eigenvalue
