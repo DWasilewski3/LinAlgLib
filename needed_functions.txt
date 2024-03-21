@@ -1,14 +1,16 @@
 Notes by topics (1 note set per topic --> ~20 total)
 help funciton that lists all other functions
 
-dot product
-multiplication 
-can multiply (by size) + output size
-projection
-rref
-ref
-addition
-transpose
+1 - vector length
+1 - dot product
+1 - projection
+1 - rref
+1 - ref
+1 - vector * scalar
+1 - vector * vector multiplication
+1 - can multiply (by size) + output size
+1 - addition
+1 - transpose
 determinant (normal, triangles, diagonal)
 inverse (regular and gaussian elimination)
 invertable? boolean
