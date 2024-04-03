@@ -469,3 +469,17 @@ def eigenvectors_for_eigenvalue(matrix: np.array, value: float, showWork: bool =
             print(np.array(vector[2][0].tolist()).astype(np.float64))
 
     return eigenvectors
+
+
+#################Joe New#############
+def norm (v1: np.array, inner_is_normal_dot_product: bool=False, showWork: bool=False) -> int:
+
+    if showWork or not inner_is_normal_dot_product:
+        print("The norm is found by taking the inner product of the vector and taking the square root of the result")
+        print("\nTo find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
+    
+    if inner_is_normal_dot_product:
+        return dot_product(v1, showWork=True)**(1/2)
+    
+    
+
