@@ -16,7 +16,7 @@ import scipy as sp
 
 #Add functions below
 
-#to add projection, grahm schmidt, linearly independent
+#to add projection, grahm schmidt, linearly independent, orthonormal basis
 
 def vector_length(vector: np.array, showWork: bool = False) -> float:
     if showWork:
