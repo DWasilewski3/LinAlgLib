@@ -94,7 +94,7 @@ def can_multiply(matrix1: np.array, matrix2: np.array, showWork: bool = False) -
 
     return can_multiply
 
-def multiply_scalar_vector(scalar: int, vector: np.array, showWork: bool = False) -> np.array:
+def multiply_vector(scalar: int, vector: np.array, showWork: bool = False) -> np.array:
     if showWork:
         print("The original scalar is:", scalar)
         print("The original vector is:", vector)
@@ -107,7 +107,7 @@ def multiply_scalar_vector(scalar: int, vector: np.array, showWork: bool = False
 
     return result_vector
 
-def multiply_vector_vector(vector1: np.array, vector2: np.array, showWork: bool = False) -> np.array:
+def multiply_vector(vector1: np.array, vector2: np.array, showWork: bool = False) -> np.array:
     if len(vector1) != len(vector2):
         raise ValueError("The number of columns in the first matrix is not equal to the number of rows in the second matrix.\nSo, the matrices cannot be multiplied.")
 
