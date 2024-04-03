@@ -580,3 +580,6 @@ def write_linear_combo_of_orthog_basis(v1: np.array, basis: np.array, inner_coef
         coefficients.append(coefficient)
     print("These are the coefficents for the linear combination. The first value given cooresponds with the first vector in the basis")
     return coefficients
+
+def make_orthogonal_basis_orthonormal():
+    return Gram_Schmidt()
