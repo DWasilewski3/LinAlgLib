@@ -469,3 +469,101 @@ def eigenvectors_for_eigenvalue(matrix: np.array, value: float, showWork: bool =
             print(np.array(vector[2][0].tolist()).astype(np.float64))
 
     return eigenvectors
+
+
+def markov_steady_state(matrix: np.array, showWork: bool = False) -> list:
+    eigval, eigvect = np.linalg.eig(matrix)
+    index = 0
+    for i in range(len(eigval)):
+        if eigval[i] == 1:
+            index = i
+    steady_state = eigvect[:,index]
+    steady_state = steady_state * -1
+    constant = 1/(sum(steady_state))
+    steady_state = steady_state * constant
+    if showWork:
+        print("To calculate the steady state matrix, you must obtain the eigenvector corresponding to the eigenvalue λ = 1. Then you must calculate a constant such that the sum of all values in the eigenvector equals to 1.")
+        print("The eigenvector corresponding to λ = 1, is:\n", eigvect[:,index] * -1)
+        print("Dividing 1 by the sum of all values gives us the constant: ", constant)
+    if showWork or not showWork:
+        print("The normalized steady state vector is:\n", steady_state)
+        
+    return steady_state
+
+
+def get_eigenvalues(matrix: np.array, showWork: bool = False) -> list:
+    eigval = np.linalg.eig(matrix)[0]
+    I = np.identity(len(matrix))
+    λ = sym.symbols('λ')
+    Iλ = I * λ 
+    A = matrix - Iλ
+    
+    if showWork:
+        print("The eigenvalues (λ) can be calculates using the equation (A - λI) = 0, and then solving for λ")
+        print("First simplifying A - λI gives the matrix:\n", sym.Matrix(A))
+        print("Then you must solve for its determinant, which simplifies to this equation:\n", sym.Matrix(A).det(), "= 0")
+    if showWork or not showWork:
+        print("Solving for λ gives:")
+        for i in range(len(eigval)):
+            print("λ" + str(i+1) + " = " + str(eigval[i]))
+    return eigval
+
+def get_eigenvectors(matrix: np.array, showWork: bool = False) -> list:
+    eigvects = np.linalg.eig(matrix)[1]
+    eigvals = np.linalg.eig(matrix)[0]
+    λ = sym.symbols('λ')
+    n = matrix.shape[0]
+    I = np.identity(n)
+    Iλ = I * λ
+    v = sym.Matrix(n, 1, lambda i, j: sym.symbols(f'x{i+1}'))
+    system = (matrix - Iλ)@v
+    if showWork:
+        print("The eigenvectors can be calculated by first finding a matrix's eigenvalues (λ), then using the equation (A-λI)v = 0, where v is an eigenvector corresponding to an eigenvalue.")
+        print("\nSubstituting A, and any eigenvalue into the equation gives the matrix system:")
+        for i in range(len(system)):
+            print("["+str(system[i])+"]")
+        print("\nSubstituting λ into the matrix system of equation allows us to solve for all variables.")
+    if showWork or not showWork:
+        print("\nSubstituting all values of λ, and solving for unknowns gives these eigenvectors:")
+        for i in range(len(eigvects)):
+            print("Eigenvector λ =", str(eigvals[i]), "=", eigvects[:,i])
+    
+    return eigvects
+
+def gram_helper_dont_use(*vectors):
+    basis = []
+    
+    for v in vectors:
+        # Remove the projection from all previous basis vectors
+        for b in basis:
+            proj = (v.dot(b) / b.dot(b)) * b
+            v = v - proj
+        
+        # Normalize the vector
+        v = v / v.norm()
+        
+        # Add the normalized vector to the basis
+        basis.append(v)
+    
+    return basis
+
+def gram_schmidt(vector_list):
+
+    # Convert the list of lists to sympy Matrix objects
+    vectors = [sym.Matrix(v) for v in vector_list]
+    
+    # Perform the Gram-Schmidt process
+    basis = gram_helper_dont_use(*vectors)
+    
+    # Convert the symbolic expressions to numerical approximations (floating-point numbers)
+    basis_approx = [b.evalf() for b in basis]
+    
+    return basis_approx
+
+
+
+
+
+
+vectors = [[-1, 3, 1, 1], [6, -8, -2, -4], [6, 3, 6, -3]]
+print(gram_schmidt(vectors))
