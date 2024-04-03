@@ -16,8 +16,6 @@ import scipy as sp
 
 #Add functions below
 
-#to add projection, grahm schmidt, linearly independent, orthonormal basis
-
 def vector_length(vector: np.array, showWork: bool = False) -> float:
     if showWork:
         print("Step 1: Square each component of the vector.")
@@ -469,7 +467,118 @@ def eigenvectors_for_eigenvalue(matrix: np.array, value: float, showWork: bool =
             print(np.array(vector[2][0].tolist()).astype(np.float64))
 
     return eigenvectors
+  
+  def inner_product(v1: np.array, v2: np.array = None, coeffs: list = None, showWork: bool = False):
+    result = 0
+    if showWork:
+        print("To find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
+    
+    size = len(v1)
+    if not coeffs:
+            coeffs = [1] * size
+    if size != len(coeffs):
+         return print("Please make sure the coefficent list is the same size as np.array (put 1 as a coeff if need to fill the space)")
+        
+    if v2: 
+        for i in range(size):
+            result += v1[i] * v2[i] * coeffs[i]
 
+    else:
+        for i in range(size):
+            result += v1[i] * v1[i] * coeffs[i]
+    return result
+
+        
+    
+
+def norm (v1: np.array, inner_product_coeff: list = None, showWork: bool=False) -> int:
+
+    if showWork:
+        print("The norm is found by taking the inner product of the vector(s) and taking the square root of the result")
+        print("\nTo find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
+        return inner_product(v1, coeffs=inner_product_coeff, showWork=True)**(1/2)
+    
+    return inner_product(v1, coeffs=inner_product_coeff, showWork=False)**(1/2)
+    
+
+
+def angle_between_vectors(v1: np.array, v2: np.array, inner_product_coeff: list = None, showWork: bool=False ):
+    if showWork:
+        print("Take inner product and divide it by ||v1|| * ||v2||, then take inverse cos")
+        return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=True) / (norm(v1,showWork=True) * norm(v2,showWork=True))))
+    print("This answer is in degrees to change to radians do np.radians() or multiply answer by np.pi/180")
+    return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=False) / (norm(v1,showWork=False) * norm(v2,showWork=False))))
+
+
+def find_matrix_P(matrix: np.array, showWork=False):
+    if showWork:
+        print("Get eigvals and eigvecs and then multiply eigvecs@np.diag(eigvals)@np.linalg.inv(eigvecs)")
+    
+    eigvals,eigvecs = np.linalg.eig(A)
+    return eigvecs@get_matrix_D(A)@np.linalg.inv(eigvecs)
+
+def get_matrix_D(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find eigvals and then call np.diag")
+    eigvals,eigvecs = np.linalg.eig(matrix)
+    return np.diag(eigvals)
+
+
+def find_matrix_A(P: np.array, D: np.array, exponent: float=1, showWork=False):
+    if showWork:
+        print("Follow formula P@D^exponent_of_A@inv(P)")
+    return P@D**exponent@np.linalg.inv(P)
+
+def find_eigvals_and_eigvecs(matrix: np.array, showWork=False):
+    return sym.Matrix(A).eigenvects()
+
+def get_singular_values(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find transpose of array then multiply it with A and find the square root of the eigvals")
+    A = matrix.T@matrix
+    return np.linalg.eig(A)[0]**(1/2)
+    
+def get_steady_state(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find eigvals and eigvec of the matrix, then eigvecs[:,0]/ sum(eigvecs[:,0])")
+        print("\nIf you need to find how many of something is in a room in the long run do the total number of things * the steadystate[room#-1]")
+        print("\nEX: Assume that there are total 12 cats, so in the long-term, how many cats will be in room 3 (12*steadystate[2])")
+
+    eigvals, eigvecs = np.linalg.eig(P)
+    return eigvecs[:,0]/ sum(eigvecs[:,0])
+
+
+def Gram_Schmidt():
+    print("Inner Product Function: ")
+    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2]")
+    print("\ngs_algo:")
+    print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    u3 = v3 - (inner_product(v1,v3)/inner_product(v1,v1) * v1) - (inner_product(u2,v3)/inner_product(u2,v2) * u2)  b.append(u3) return b")
+    print("\nEdit given code for inner product and gs algo accoording to the given basis: To add/subtract vectors from the basis follow pattern")
+
+def projection_v_onto_u(v: np.array, u: np.array, inner_prod_coeffs: list=None,showWork: bool=False):
+    if not inner_prod_coeffs:
+        inner_prod_coeffs = [1] * len(v)
+
+    if len(inner_prod_coeffs) != len(v):
+        print("Either not enough inner product coefficents were given or there is an error in the vectors given")
+
+    numerator = inner_product(v, u, coeffs=inner_prod_coeffs, showWork=False)
+    denomonator = inner_product(u,u,coeffs=inner_prod_coeffs, showWork=False)
+    return (numerator / denomonator) * np.array(u)
+
+def write_linear_combo_of_orthog_basis(v1: np.array, basis: np.array, inner_coeffs: list=None, showWork: bool=False):
+    if showWork:
+        print("Find projection of given vector onto the basis vector and the result is the coefficent for the basis vector in the linear combination")
+
+    coefficients = []
+    for v in basis:
+        coefficient = inner_product(v1, v,coeffs=inner_coeffs) / inner_product(v, v, coeffs=inner_coeffs)
+        coefficients.append(coefficient)
+    print("These are the coefficents for the linear combination. The first value given cooresponds with the first vector in the basis")
+    return coefficients
+
+def make_orthogonal_basis_orthonormal():
+    return Gram_Schmidt()
 
 def markov_steady_state(matrix: np.array, showWork: bool = False) -> list:
     eigval, eigvect = np.linalg.eig(matrix)
