@@ -480,6 +480,7 @@ def norm (v1: np.array, inner_is_normal_dot_product: bool=False, showWork: bool=
     
     if inner_is_normal_dot_product:
         return dot_product(v1, showWork=True)**(1/2)
-    
+
+
     
 
