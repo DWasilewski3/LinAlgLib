@@ -569,3 +569,14 @@ def projection_v_onto_u(v: np.array, u: np.array, inner_prod_coeffs: list=None,s
     numerator = inner_product(v, u, coeffs=inner_prod_coeffs, showWork=False)
     denomonator = inner_product(u,u,coeffs=inner_prod_coeffs, showWork=False)
     return (numerator / denomonator) * np.array(u)
+
+def write_linear_combo_of_orthog_basis(v1: np.array, basis: np.array, inner_coeffs: list=None, showWork: bool=False):
+    if showWork:
+        print("Find projection of given vector onto the basis vector and the result is the coefficent for the basis vector in the linear combination")
+
+    coefficients = []
+    for v in basis:
+        coefficient = inner_product(v1, v,coeffs=inner_coeffs) / inner_product(v, v, coeffs=inner_coeffs)
+        coefficients.append(coefficient)
+    print("These are the coefficents for the linear combination. The first value given cooresponds with the first vector in the basis")
+    return coefficients
