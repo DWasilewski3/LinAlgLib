@@ -94,7 +94,7 @@ def can_multiply(matrix1: np.array, matrix2: np.array, showWork: bool = False) -
 
     return can_multiply
 
-def multiply(scalar: int, vector: np.array, showWork: bool = False) -> np.array:
+def multiply_scalar_vector(scalar: int, vector: np.array, showWork: bool = False) -> np.array:
     if showWork:
         print("The original scalar is:", scalar)
         print("The original vector is:", vector)
@@ -107,7 +107,7 @@ def multiply(scalar: int, vector: np.array, showWork: bool = False) -> np.array:
 
     return result_vector
 
-def multiply(vector1: np.array, vector2: np.array, showWork: bool = False) -> np.array:
+def multiply_vector_vector(vector1: np.array, vector2: np.array, showWork: bool = False) -> np.array:
     if len(vector1) != len(vector2):
         raise ValueError("The number of columns in the first matrix is not equal to the number of rows in the second matrix.\nSo, the matrices cannot be multiplied.")
 
@@ -508,7 +508,9 @@ def norm (v1: np.array, inner_product_coeff: list = None, showWork: bool=False) 
 
 def angle_between_vectors(v1: np.array, v2: np.array, inner_product_coeff: list = None, showWork: bool=False ):
     if showWork:
+        print("Take inner product and divide it by ||v1|| * ||v2||, then take inverse cos")
         return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=True) / (norm(v1,showWork=True) * norm(v2,showWork=True))))
+    print("This answer is in degrees to change to radians do np.radians() or multiply answer by np.pi/180")
     return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=False) / (norm(v1,showWork=False) * norm(v2,showWork=False))))
 
 
@@ -557,12 +559,13 @@ def Gram_Schmidt():
     print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    u3 = v3 - (inner_product(v1,v3)/inner_product(v1,v1) * v1) - (inner_product(u2,v3)/inner_product(u2,v2) * u2)  b.append(u3) return b")
     print("\nEdit given code for inner product and gs algo accoording to the given basis: To add/subtract vectors from the basis follow pattern")
 
+def projection_v_onto_u(v: np.array, u: np.array, inner_prod_coeffs: list=None,showWork: bool=False):
+    if not inner_prod_coeffs:
+        inner_prod_coeffs = [1] * len(v)
 
-    
+    if len(inner_prod_coeffs) != len(v):
+        print("Either not enough inner product coefficents were given or there is an error in the vectors given")
 
-    
-
-
-
-    
-
+    numerator = inner_product(v, u, coeffs=inner_prod_coeffs, showWork=False)
+    denomonator = inner_product(u,u,coeffs=inner_prod_coeffs, showWork=False)
+    return (numerator / denomonator) * np.array(u)
