@@ -510,6 +510,54 @@ def angle_between_vectors(v1: np.array, v2: np.array, inner_product_coeff: list 
     if showWork:
         return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=True) / (norm(v1,showWork=True) * norm(v2,showWork=True))))
     return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=False) / (norm(v1,showWork=False) * norm(v2,showWork=False))))
+
+
+def find_matrix_P(matrix: np.array, showWork=False):
+    if showWork:
+        print("Get eigvals and eigvecs and then multiply eigvecs@np.diag(eigvals)@np.linalg.inv(eigvecs)")
+    
+    eigvals,eigvecs = np.linalg.eig(A)
+    return eigvecs@get_matrix_D(A)@np.linalg.inv(eigvecs)
+
+def get_matrix_D(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find eigvals and then call np.diag")
+    eigvals,eigvecs = np.linalg.eig(matrix)
+    return np.diag(eigvals)
+
+
+def find_matrix_A(P: np.array, D: np.array, exponent: float=1, showWork=False):
+    if showWork:
+        print("Follow formula P@D^exponent_of_A@inv(P)")
+    return P@D**exponent@np.linalg.inv(P)
+
+def find_eigvals_and_eigvecs(matrix: np.array, showWork=False):
+    return sym.Matrix(A).eigenvects()
+
+def get_singular_values(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find transpose of array then multiply it with A and find the square root of the eigvals")
+    A = matrix.T@matrix
+    return np.linalg.eig(A)[0]**(1/2)
+    
+def get_steady_state(matrix: np.array, showWork=False):
+    if showWork:
+        print("Find eigvals and eigvec of the matrix, then eigvecs[:,0]/ sum(eigvecs[:,0])")
+        print("\nIf you need to find how many of something is in a room in the long run do the total number of things * the steadystate[room#-1]")
+        print("\nEX: Assume that there are total 12 cats, so in the long-term, how many cats will be in room 3 (12*steadystate[2])")
+
+    eigvals, eigvecs = np.linalg.eig(P)
+    return eigvecs[:,0]/ sum(eigvecs[:,0])
+
+
+def Gram_Schmidt():
+    print("Inner Product Function: ")
+    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2]")
+    print("\ngs_algo:")
+    print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    u3 = v3 - (inner_product(v1,v3)/inner_product(v1,v1) * v1) - (inner_product(u2,v3)/inner_product(u2,v2) * u2)  b.append(u3) return b")
+    print("\nEdit given code for inner product and gs algo accoording to the given basis: To add/subtract vectors from the basis follow pattern")
+
+
     
 
     
