@@ -472,14 +472,48 @@ def eigenvectors_for_eigenvalue(matrix: np.array, value: float, showWork: bool =
 
 
 #################Joe New#############
-def norm (v1: np.array, inner_is_normal_dot_product: bool=False, showWork: bool=False) -> int:
+def inner_product(v1: np.array, v2: np.array = None, coeffs: list = None, showWork: bool = False):
+    result = 0
+    if showWork:
+        print("To find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
+    
+    size = len(v1)
+    if not coeffs:
+            coeffs = [1] * size
+    if size != len(coeffs):
+         return print("Please make sure the coefficent list is the same size as np.array (put 1 as a coeff if need to fill the space)")
+        
+    if v2: 
+        for i in range(size):
+            result += v1[i] * v2[i] * coeffs[i]
 
-    if showWork or not inner_is_normal_dot_product:
+    else:
+        for i in range(size):
+            result += v1[i] * v1[i] * coeffs[i]
+    return result
+
+        
+    
+
+def norm (v1: np.array, inner_product_coeff: list = None, showWork: bool=False) -> int:
+
+    if showWork:
         print("The norm is found by taking the inner product of the vector(s) and taking the square root of the result")
         print("\nTo find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
+        return inner_product(v1, coeffs=inner_product_coeff, showWork=True)**(1/2)
     
-    if inner_is_normal_dot_product:
-        return dot_product(v1, showWork=True)**(1/2)
+    return inner_product(v1, coeffs=inner_product_coeff, showWork=False)**(1/2)
+    
+
+
+def angle_between_vectors(v1: np.array, v2: np.array, inner_product_coeff: list = None, showWork: bool=False ):
+    if showWork:
+        return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=True) / (norm(v1,showWork=True) * norm(v2,showWork=True))))
+    return np.degrees(np.arccos(inner_product(v1,v2,inner_product_coeff,showWork=False) / (norm(v1,showWork=False) * norm(v2,showWork=False))))
+    
+
+    
+
 
 
     
