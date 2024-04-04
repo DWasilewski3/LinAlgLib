@@ -468,7 +468,7 @@ def eigenvectors_for_eigenvalue(matrix: np.array, value: float, showWork: bool =
 
     return eigenvectors
   
-  def inner_product(v1: np.array, v2: np.array = None, coeffs: list = None, showWork: bool = False):
+def inner_product(v1: np.array, v2: np.array = None, coeffs: list = None, showWork: bool = False):
     result = 0
     if showWork:
         print("To find the inner product: Plug in each vector component to the cooresponding variable in the inner product equation")
@@ -566,6 +566,8 @@ def projection_v_onto_u(v: np.array, u: np.array, inner_prod_coeffs: list=None,s
     denomonator = inner_product(u,u,coeffs=inner_prod_coeffs, showWork=False)
     return (numerator / denomonator) * np.array(u)
 
+
+
 def write_linear_combo_of_orthog_basis(v1: np.array, basis: np.array, inner_coeffs: list=None, showWork: bool=False):
     if showWork:
         print("Find projection of given vector onto the basis vector and the result is the coefficent for the basis vector in the linear combination")
@@ -578,6 +580,7 @@ def write_linear_combo_of_orthog_basis(v1: np.array, basis: np.array, inner_coef
     return coefficients
 
 def make_orthogonal_basis_orthonormal():
+    print("Perform Gram_Schmidt then once you get the vectors normalize then divde by the norm of the vector")
     return Gram_Schmidt()
 
 def markov_steady_state(matrix: np.array, showWork: bool = False) -> list:
