@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='LinAlgLib',
-    version='0.1.2',
+    version='0.1.3',
     author='David_Wasilewski',
     packages=find_packages(),
     py_modules=['functions'],
