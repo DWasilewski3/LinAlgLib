@@ -1,6 +1,5 @@
 import numpy as np
 import sympy as sym  
-import scipy as sp
 import inspect
 
 def test ():

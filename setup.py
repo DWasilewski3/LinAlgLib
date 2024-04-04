@@ -1,15 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='LinAlgLib',
-    version='0.1.3',
+    name='LinAlgLibrary',
+    version='0.1.1',
     author='David_Wasilewski',
     packages=find_packages(),
     py_modules=['functions'],
     install_requires=[
         'numpy',
         'sympy',
-        'scipy',
         'inspect'
     ],
     long_description=open('README.md').read(),
