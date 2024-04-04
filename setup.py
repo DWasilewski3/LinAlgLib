@@ -9,7 +9,8 @@ setup(
     install_requires=[
         'numpy',
         'sympy',
-        'scipy'
+        'scipy',
+        'inspect'
     ],
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',

@@ -1,18 +1,81 @@
+import numpy as np
+import sympy as sym  
+import scipy as sp
+import inspect
+
 def test ():
     print("Hello World")
 
-def help():
-    global_objects = globals()
-    functions = {name: obj for name, obj in global_objects.items() if callable(obj)}
-    print(functions)
+def help(quiz_number: int = 0):
+    functions = []
+    if quiz_number == 0 or quiz_number == 1:
+        functions += [
+        vector_length,
+        dot_product,
+        ref,
+        rref,
+        can_multiply,
+        multiply,
+        multiply,
+        add,]
+    if quiz_number == 0 or quiz_number == 2:
+        functions += [
+        transpose,
+        is_invertible,
+        inverse,
+        determinant,
+        elementary_matrices,
+        linear_transformation_to,
+        linear_transformation_from,
+        kernel,
+        nullspace]
+    if quiz_number == 0 or quiz_number == 3:
+        functions += [
+        check_transformation,
+        range_of_transformation,
+        is_euclidean_subspace,
+        basis_of_subspace,
+        null_space,
+        column_space,
+        row_space,
+        are_orthogonal,
+        are_bases_orthogonal,
+        orthogonal_complement,
+        orthogonal_complement_vector]
+    if quiz_number == 0 or quiz_number == 4:
+        functions += [
+        is_eigenvector,
+        is_eigenvalue,
+        eigenvectors_for_eigenvalue,
+        inner_product,
+        norm,
+        angle_between_vectors,
+        get_matrix_D,
+        find_matrix_A,
+        find_eigvals_and_eigvecs,
+        get_singular_values,
+        get_steady_state,
+        projection_v_onto_u,
+        write_linear_combo_of_orthog_basis,
+        make_orthogonal_basis_orthonormal,
+        markov_steady_state,
+        get_eigenvalues,
+        get_eigenvectors,
+        gram_schmidt]
+
+    for func in functions:
+        signature = inspect.signature(func)
+        print(f"Function Name: {func.__name__}")
+        print(f"Parameters:")
+        for param_name, param_obj in signature.parameters.items():
+            if param_name != 'showWork':  # Exclude the 'showWork' parameter
+                print(f"- {param_name}: {param_obj.annotation}")
+        print(f"Return Type: {signature.return_annotation}\n")
+    return
 
 '''
 If contributing, please add boolean 'showWork' and show steps to calculate if true
 '''
-
-import numpy as np
-import sympy as sym  
-import scipy as sp
 
 #Add functions below
 
