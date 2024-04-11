@@ -1,0 +1,27 @@
+Publishing to PyPI
+
+Here are the steps to publish your Python library to PyPI:
+
+1. Ensure your package is ready for release: Your package should include a setup.py, README.md, and a LICENSE file at the very least.
+
+2. Update your setup.py file: Make sure the version number in your setup.py file is updated to the new version you want to release.
+
+3. Generate distribution archives: You'll need to create a source archive (tar.gz) and a wheel (.whl) for your package. You can do this with the following command:
+
+python setup.py sdist bdist_wheel
+
+4. Install twine: Twine is a utility for publishing Python packages on PyPI. You can install it using pip:
+
+pip install twine
+
+5. Upload the distribution archives: You can use twine to upload your distribution archives. The following command will upload all of the archives under dist:
+
+python -m twine upload dist/*
+
+To upload to TestPyPI, you can use the -r or --repository-url flag:
+
+python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+6. Check your package: Go to https://pypi.org/project/LinAlgLib and check that everything looks good.
+
+Remember, once a version of a package is released on PyPI, it cannot be changed or deleted, so make sure everything is as you want it before you publish!
