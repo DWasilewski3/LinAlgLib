@@ -612,21 +612,21 @@ def get_steady_state(matrix: np.array, showWork=False):
 
 def Gram_Schmidt_2():
     print("Inner Product Function: ")
-    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1]")
+    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1]", "Edit accoording to the amount of components in the vector")
     print("\ngs_algo:")
     print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    return b")
     return
 
 def Gram_Schmidt_3():
     print("Inner Product Function: ")
-    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2]")
+    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2], Edit accoording to the amount of components in the vector")
     print("\ngs_algo:")
     print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    u3 = v3 - (inner_product(v1,v3)/inner_product(v1,v1) * v1) - (inner_product(u2,v3)/inner_product(u2,u2) * u2)  b.append(u3) return b")
     return
 
 def Gram_Schmidt_4():
     print("Inner Product Function: ")
-    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2] + 5 * v1[3] * v2[3]")
+    print("\ndef inner_product(v1, v2):return 4 * v1[0] * v2[0] + 3 * v1[1] * v2[1] + 5 * v1[2] * v2[2] + 5 * v1[3] * v2[3], Edit accoording to the amount of components in the vector")
     print("\ngs_algo:")
     print("\ndef gs(v1, v2, v3):    b = [[v1]]    u2 = v2 - (inner_product(v1,v2)/inner_product(v1,v1) * v1)    b.append(u2)    u3 = v3 - (inner_product(v1,v3)/inner_product(v1,v1) * v1) - (inner_product(u2,v3)/inner_product(u2,u2) * u2)  b.append(u3)    u4 = v4 - (inner_product(v1,v4)/inner_product(v1,v1) * v1) - (inner_product(u2,v4)/inner_product(u2,u2) * u2) - (inner_product(u3,v4)/inner_product(u3,u3) * u3)    b.append(u4)  return b")
     return
